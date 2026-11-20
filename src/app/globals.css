@@ -1,0 +1,469 @@
+@import "tailwindcss";
+
+@custom-variant fine (@media (hover: hover) and (pointer: fine));
+
+/* ───────────────────────── Design tokens (v2 — editorial, Go Uncharted–led) ───────────────────────── */
+@theme {
+  --color-ink: #12151d;
+  --color-ink-2: #1b1f29;
+  --color-ink-3: #262b37;
+  --color-paper: #f3efe8;
+  --color-paper-2: #ebe5db;
+  --color-paper-3: #e2dacd;
+  --color-stone: #5f5b54;
+  --color-stone-light: #a39e93;
+  --color-line: #d9d2c5;
+  --color-line-dark: #2c3140;
+  --color-signal: #e0523f;
+  --color-signal-deep: #a8331f;
+  --color-signal-strong: #c8432f;
+  --color-indigo: #4d57c8;
+  --color-whatsapp: #25d366;
+
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.65, 0, 0.35, 1);
+  --breakpoint-3xl: 1800px;
+}
+
+/* ───────────────────────── Base ───────────────────────── */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: 8.5rem;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  ::selection {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-indigo);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .on-ink :focus-visible {
+    outline-color: var(--color-paper);
+  }
+}
+
+/* ───────────────────────── Type system ───────────────────────── */
+/* Heavy, wide grotesk display — uppercase hero/card titles */
+@utility font-display {
+  font-family: var(--font-sans);
+  font-weight: 750;
+  font-variation-settings: "wdth" 104;
+  text-transform: uppercase;
+  letter-spacing: -0.035em;
+  line-height: 0.9;
+}
+/* Bold sentence-case section titles ("Five ways to move cargo") */
+@utility font-title {
+  font-family: var(--font-sans);
+  font-weight: 650;
+  font-variation-settings: "wdth" 100;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+/* Large editorial sentences */
+@utility font-editorial {
+  font-family: var(--font-sans);
+  font-weight: 380;
+  font-variation-settings: "wdth" 100;
+  letter-spacing: -0.045em;
+  line-height: 1.04;
+}
+@utility label-mono {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.45;
+}
+
+/* Fluid sizes */
+@utility text-mega {
+  font-size: clamp(2.6rem, 6.3vw, 7.4rem);
+}
+@utility text-huge {
+  font-size: clamp(2.75rem, 7vw, 7.5rem);
+}
+@utility text-big {
+  font-size: clamp(2.25rem, 4.6vw, 4.75rem);
+}
+@utility text-lead {
+  font-size: clamp(1.9rem, 4.4vw, 4.6rem);
+}
+@utility text-sub {
+  font-size: clamp(1.3rem, 1.9vw, 1.85rem);
+}
+
+/* Layout */
+@utility shell {
+  width: 100%;
+  max-width: 1600px;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 2.4vw, 2.25rem);
+}
+@utility section-y {
+  padding-block: clamp(5rem, 10vw, 10rem);
+}
+
+/* ───────────────────────── Buttons (rectangular, square icon tile) ───────────────────────── */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  height: 3rem;
+  padding: 0.3rem 0.3rem 0.3rem 1.15rem;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition: background-color 0.4s var(--ease-expo), color 0.4s var(--ease-expo), box-shadow 0.4s var(--ease-expo), transform 0.4s var(--ease-expo);
+}
+.btn-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.btn-icon svg {
+  transition: transform 0.55s var(--ease-expo);
+}
+.btn-icon svg + svg {
+  position: absolute;
+  transform: translate(-150%, 150%);
+}
+.btn:hover .btn-icon svg:first-child {
+  transform: translate(150%, -150%);
+}
+.btn:hover .btn-icon svg + svg {
+  transform: translate(0, 0);
+}
+.btn:active {
+  transform: scale(0.98);
+}
+.btn-dark {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+.btn-dark .btn-icon {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+.btn-dark:hover {
+  background: var(--color-ink-3);
+}
+.btn-light {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+.btn-light .btn-icon {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+.btn-light:hover {
+  background: #fff;
+}
+.btn-signal {
+  background: var(--color-signal-strong);
+  color: #fff;
+}
+.btn-signal .btn-icon {
+  background: #fff;
+  color: var(--color-signal-strong);
+}
+.btn-signal:hover {
+  background: var(--color-signal-deep);
+}
+.btn-outline {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 30%, transparent);
+}
+.btn-outline .btn-icon {
+  background: color-mix(in srgb, currentColor 10%, transparent);
+}
+.btn-outline:hover {
+  box-shadow: inset 0 0 0 1px currentColor;
+}
+.btn-plain {
+  padding-right: 1.15rem;
+}
+
+/* Underline link */
+.link-line {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.6s var(--ease-expo);
+}
+.link-line:hover,
+.link-line:focus-visible {
+  background-size: 100% 1px;
+}
+
+/* Glass chip (metadata over photography) */
+.chip-glass {
+  display: inline-flex;
+  align-items: center;
+  height: 2.4rem;
+  padding-inline: 0.9rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #fff;
+  background: rgb(18 21 29 / 0.32);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.22);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+}
+
+/* Marquee */
+.marquee {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.marquee-track {
+  display: flex;
+  flex-shrink: 0;
+  min-width: 100%;
+  align-items: center;
+  animation: marquee var(--marquee-duration, 40s) linear infinite;
+}
+.marquee[data-reverse="true"] .marquee-track {
+  animation-direction: reverse;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* Image hover zoom */
+.zoom-media img {
+  transition: transform 1.6s var(--ease-expo);
+}
+.zoom-group:hover .zoom-media img,
+.zoom-group:focus-visible .zoom-media img {
+  transform: scale(1.05);
+}
+
+/* Design lab: hanging container sway (pivot = top centre of the viewport) */
+@keyframes lab-sway {
+  0%,
+  100% {
+    transform: rotate(-0.7deg);
+  }
+  50% {
+    transform: rotate(0.7deg);
+  }
+}
+.lab-sway {
+  transform-origin: 50% 0;
+  animation: lab-sway 7s var(--ease-soft) infinite;
+}
+
+/* Design lab: carousel progress bar */
+@keyframes lab-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Smooth accordion (grid-rows technique) */
+.accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.6s var(--ease-expo), opacity 0.5s var(--ease-expo);
+  opacity: 0;
+}
+.accordion-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.accordion-panel > div {
+  overflow: hidden;
+}
+
+/* Reveal helpers. Without JS (or with reduced motion) everything is visible.
+   An inline head script adds .js-motion so content is pre-hidden before first paint;
+   GSAP then claims the element ([data-motion-ready]) and animates it in.
+   If GSAP never runs, the fallback animation reveals the content after 2.5s. */
+.js-motion [data-reveal]:not([data-motion-ready]) {
+  opacity: 0;
+  animation: motion-fallback 0.6s 2.5s forwards;
+}
+.js-motion [data-lab]:not([data-lab="top"]):not([data-motion-ready]) {
+  opacity: 0;
+  animation: motion-fallback 0.6s 2.5s forwards;
+}
+.js-motion [data-reveal-lines]:not([data-motion-ready]) [data-line-inner] {
+  transform: translateY(112%);
+  animation: motion-fallback 0.6s 2.5s forwards;
+}
+.js-motion [data-reveal-image]:not([data-motion-ready]) {
+  clip-path: inset(100% 0% 0% 0%);
+  animation: motion-fallback 0.6s 2.5s forwards;
+}
+@keyframes motion-fallback {
+  to {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0% 0% 0% 0%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee-track {
+    animation: none !important;
+  }
+}
+
+/* Design lab · In focus: animated line icons. Every shape carries pathLength="1", so the outline can "draw in", hold,
+   then "draw out" in a loop; the clock hand also sweeps. Only runs when the visitor has not asked for reduced motion
+   (otherwise the icons simply stay fully drawn). */
+@media (prefers-reduced-motion: no-preference) {
+  .ico-draw :is(path, line, circle) {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: ico-trace 5.2s ease-in-out infinite;
+  }
+  .ico-draw > :nth-child(2) {
+    animation-delay: 0.18s;
+  }
+  .ico-draw > :nth-child(3) {
+    animation-delay: 0.36s;
+  }
+  .ico-draw > :nth-child(4) {
+    animation-delay: 0.54s;
+  }
+  .ico-hand {
+    transform-box: view-box;
+    transform-origin: 12px 14px;
+    animation: ico-sweep 5.2s linear infinite;
+  }
+  @keyframes ico-trace {
+    0% {
+      stroke-dashoffset: 1;
+    }
+    26% {
+      stroke-dashoffset: 0;
+    }
+    82% {
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dashoffset: -1;
+    }
+  }
+  @keyframes ico-sweep {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(720deg);
+    }
+  }
+}
+
+/* Design lab · Shipping worldwide: the sea (a real sea-surface photograph, Higgsfield — scripts/process-water.mjs), the ship's
+   foam trail and the ship bobbing on the water. --sea-h is the band height; the strip's tile is 4.665 × that wide, which is
+   exactly one period of the (mirrored, seamless) picture, so the drift loops with no jump. */
+.sea {
+  height: var(--sea-h, 19rem);
+  --tile: calc(var(--sea-h, 19rem) * 4.665);
+  background: url("/images/home/sea.webp") repeat-x 0 0 / auto 100%;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 20%, #000 80%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 20%, #000 80%, transparent);
+}
+/* a second, upside-down copy drifting the other way and blended in: the two layers slide over each other, so the
+   ripples shimmer like real water instead of scrolling as one flat picture */
+.sea::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/images/home/sea.webp") repeat-x 0 0 / auto 100%;
+  transform: scaleY(-1);
+  mix-blend-mode: soft-light;
+  opacity: 0.7;
+}
+.ship-wake {
+  background: linear-gradient(to left, rgb(255 255 255 / 0.9), rgb(255 255 255 / 0.45) 40%, rgb(255 255 255 / 0));
+  clip-path: polygon(100% 24%, 100% 76%, 0 100%, 0 0);
+  filter: blur(2.5px);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sea {
+    animation: sea-drift-a 90s linear infinite;
+  }
+  .sea::after {
+    animation: sea-drift-b 140s linear infinite;
+  }
+  .ship-bob {
+    animation: ship-bob 6.5s ease-in-out infinite alternate;
+  }
+  @keyframes sea-drift-a {
+    to {
+      background-position-x: calc(var(--tile) * -1);
+    }
+  }
+  @keyframes sea-drift-b {
+    to {
+      background-position-x: var(--tile);
+    }
+  }
+  @keyframes ship-bob {
+    from {
+      transform: translateY(-2px) rotate(-0.25deg);
+    }
+    to {
+      transform: translateY(3px) rotate(0.3deg);
+    }
+  }
+}
