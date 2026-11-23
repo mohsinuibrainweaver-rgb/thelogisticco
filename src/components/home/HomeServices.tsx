@@ -144,7 +144,7 @@ export function HomeServices() {
               >
                 <article
                   data-sv="card"
-                  className="group relative grid origin-top overflow-hidden rounded-[10px] bg-paper-2 ring-1 ring-ink/10 shadow-[0_26px_54px_-32px_rgba(18,21,29,0.45)] md:min-h-[28rem] md:grid-cols-[1.08fr_1fr]"
+                  className="group relative grid origin-top overflow-hidden rounded-[10px] bg-white ring-1 ring-ink/[0.06] shadow-[0_26px_54px_-32px_rgba(18,21,29,0.45)] md:min-h-[28rem] md:grid-cols-[1.08fr_1fr]"
                 >
                   <div className="relative order-2 flex flex-col justify-between gap-10 p-6 sm:p-8 md:order-1">
                     <div className="flex items-start justify-between gap-4">
