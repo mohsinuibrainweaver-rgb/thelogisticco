@@ -8,12 +8,12 @@ import { gsap, useGSAP, MOTION_OK, claim } from "@/components/motion/gsap";
 import { company, memberships } from "@/content/site";
 
 /**
- * DESIGN LAB — "About us", laid out like the About section of the reference (travelo.framer.media):
+ * "About us", laid out like the About section of the reference (travelo.framer.media):
  * a centred label with hairlines and tiny arrows, a large centred statement, a row with a white pill button and a
  * small "trusted by" avatar cluster, line illustrations on either side of the statement, then three rounded cards —
  * white · photo with overlaid text · white. All copy is the original website's About content (statement built from the
  * About Company paragraph, Vision, Mission, 20+ years of experience). The hero fades out into the page colour as this
- * section arrives (see LabHeroFade).
+ * section arrives (see HomeHeroFade).
  */
 
 /** Built only from the original About Company paragraph. */
@@ -60,7 +60,7 @@ function CraneArt(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-export function LabAbout() {
+export function HomeAbout() {
   const ref = useRef<HTMLElement>(null);
 
   useGSAP(

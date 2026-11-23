@@ -5,7 +5,7 @@ import { stats } from "@/content/site";
 import { cn } from "@/lib/cn";
 
 /**
- * DESIGN LAB — "In numbers" built like the reference's KPI strip (overlands.framer.website): four columns divided
+ * "In numbers" built like the reference's KPI strip (overlands.framer.website): four columns divided
  * by hairlines, a very large number and a two-line label sitting at the bottom of each, with the columns alternately
  * shorter and taller so the numbers step up and down. Hovering a column shows its photograph in the middle of that
  * column's free space above the number (it wipes up from the bottom with a slight zoom settle), shown whole at its own 4:5 shape, and never covers the number or label. Figures are the
@@ -18,7 +18,7 @@ const KPIS = [
   { stat: stats[3], image: "/images/kpis/clients.webp", alt: "A delivery being handed over to a client at a warehouse loading dock" },
 ] as const;
 
-export function LabKpis() {
+export function HomeKpis() {
   return (
     <section aria-labelledby="lab-kpi-title" className="py-12 sm:py-16">
       <div className="shell">

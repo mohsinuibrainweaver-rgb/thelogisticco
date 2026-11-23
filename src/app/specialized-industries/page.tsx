@@ -1,15 +1,13 @@
 import Image from "next/image";
 import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/motion/Reveal";
-import { WordReveal } from "@/components/motion/WordReveal";
-import { ScrollZoom } from "@/components/motion/ScrollZoom";
-import { ImageHero } from "@/components/sections/ImageHero";
+import { CtaBand, SectionHead } from "@/components/sections/inner";
+import { PageHero } from "@/components/sections/PageHero";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { industries, industriesIntro } from "@/content/industries";
 import { strengths } from "@/content/site";
 import { breadcrumbSchema } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
-import { cn } from "@/lib/cn";
 
 export const metadata = pageMetadata({
   title: "Specialized Industries — Textile to Pharmaceutical",
@@ -20,87 +18,74 @@ export const metadata = pageMetadata({
 });
 
 export default function IndustriesPage() {
-  const withImages = industries.filter((i) => i.image);
   return (
     <>
       <JsonLd data={breadcrumbSchema([{ name: "Home", href: "/" }, { name: "Specialized Industries", href: "/specialized-industries/" }])} />
 
-      <ImageHero
-        image={{ src: "/images/industries/hero.webp", alt: "Steel coils and bundles of pipes staged on a port quay for loading" }}
+      <PageHero
         crumbs={[{ name: "Home", href: "/" }, { name: "Specialized Industries" }]}
-        label={`Industries — ${industries.length} sectors`}
+        label="Industries we serve"
         lines={["Specialised", "industries."]}
-        aside={<p>{industriesIntro}</p>}
-        meta={[
-          { k: "Sectors", v: String(industries.length) },
-          { k: "General", v: "Cargo" },
-          { k: "Perishable", v: "Reefer · Temp." },
-          { k: "Hazardous", v: "DG handling" },
-          { k: "Out of gauge", v: "Heavy lift, break bulk and project cargo, planned from on-site survey to delivery.", wide: true },
-        ]}
+        description={industriesIntro}
+        actions={
+          <>
+            <ButtonLink href="/contact/">Discuss your cargo</ButtonLink>
+            <ButtonLink href="/our-services/" variant="outline">
+              Our services
+            </ButtonLink>
+          </>
+        }
+        photo={{ src: "/images/industries/hero.webp", alt: "Steel coils and bundles of pipes staged on a port quay for loading" }}
+        chips={[`${industries.length} sectors`, "General cargo", "Perishable · reefer", "Hazardous · DG handling", "Heavy lift & project cargo"]}
       />
 
-      <section aria-labelledby="ind-heading" className="section-y">
+      <section aria-labelledby="ind-heading" className="py-12 sm:py-16">
         <div className="shell">
-          <p className="label-mono mb-8 text-stone">— Sectors we serve</p>
-          <WordReveal
-            as="h2"
-            id="ind-heading"
-            text="Fifteen sectors, each with its own cargo,"
-            muted="compliance and timing."
-            className="font-editorial text-lead max-w-[22ch]"
-          />
-
-          {/* Feature tiles with photography */}
-          <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {withImages.map((ind, i) => (
-              <Reveal key={ind.name} delay={i * 0.06} className="zoom-group group">
-                <div className="relative">
-                  <ScrollZoom className="zoom-media aspect-[4/5] rounded-[6px]">
-                    <Image src={ind.image!.src} alt={ind.image!.alt} fill sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" className="object-cover" />
-                  </ScrollZoom>
-                  <span className="chip-glass absolute bottom-3 left-3">{String(industries.indexOf(ind) + 1).padStart(2, "0")}</span>
+          <SectionHead label="Sectors we serve" id="ind-heading" lines={["Fifteen sectors, each with", "its own cargo and timing."]} align="center" />
+          <Reveal as="ul" stagger={0.05} y={36} className="mt-14 grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 lg:grid-cols-5">
+            {industries.map((ind) => (
+              <li key={ind.name}>
+                <div className="group flex h-full flex-col overflow-hidden rounded-[18px] bg-white shadow-[0_22px_44px_-34px_rgba(18,21,29,0.3)] ring-1 ring-ink/5 transition-[transform,box-shadow] duration-500 ease-[var(--ease-expo)] hover:-translate-y-1 hover:shadow-[0_30px_56px_-32px_rgba(18,21,29,0.42)]">
+                  <div className="relative aspect-[500/342] overflow-hidden bg-paper-3">
+                    <Image
+                      src={ind.cover}
+                      alt={`${ind.name} cargo`}
+                      fill
+                      sizes="(min-width: 1024px) 20vw, (min-width: 768px) 32vw, 48vw"
+                      className="object-cover transition-transform duration-[1400ms] ease-[var(--ease-expo)] group-hover:scale-[1.08]"
+                    />
+                  </div>
+                  <h3 className="px-4 py-4 text-center text-[1.02rem] font-medium leading-snug tracking-[-0.02em] sm:px-5 sm:py-5">{ind.name}</h3>
                 </div>
-                <h3 className="font-display mt-5 text-[clamp(1.6rem,2.2vw,2.1rem)]">{ind.name}</h3>
-              </Reveal>
-            ))}
-          </div>
-
-          {/* Full index */}
-          <Reveal as="ol" stagger={0.03} y={16} className="mt-20 grid gap-x-12 border-t border-line md:grid-cols-2 lg:grid-cols-3">
-            {industries.map((ind, i) => (
-              <li key={ind.name} className="group flex items-center justify-between gap-4 border-b border-line py-5">
-                <h3 className="text-sub tracking-[-0.03em] transition-transform duration-500 ease-[var(--ease-expo)] group-hover:translate-x-1.5">{ind.name}</h3>
-                <span className={cn("label-mono", ind.image ? "text-signal-deep" : "text-stone")}>{String(i + 1).padStart(2, "0")}</span>
               </li>
             ))}
           </Reveal>
-          <p className="label-mono mt-6 text-stone">Photography is illustrative.</p>
         </div>
       </section>
 
-      <section aria-labelledby="exp-heading" className="bg-paper-2 section-y">
+      <section aria-labelledby="exp-heading" className="bg-paper-2 py-20 sm:py-28">
         <div className="shell">
           <div className="grid gap-6 lg:grid-cols-12">
-            <p className="label-mono text-stone lg:col-span-4">— Celebrate excellence in logistics</p>
+            <p className="label-mono text-signal-strong lg:col-span-4">Celebrate excellence in logistics</p>
             <h2 id="exp-heading" className="font-title text-big lg:col-span-8">
               Handled with care, worldwide.
             </h2>
           </div>
-          <div className="mt-14 grid gap-4 md:grid-cols-3">
+          <Reveal as="ul" stagger={0.1} y={40} className="mt-14 grid gap-4 md:grid-cols-3">
             {strengths.slice(0, 3).map((s, i) => (
-              <Reveal key={s.title} delay={i * 0.08} className="rounded-[8px] bg-paper p-8">
-                <p className="label-mono text-signal-deep">{String(i + 1).padStart(2, "0")}</p>
-                <h3 className="font-editorial mt-8 text-[clamp(1.6rem,2.2vw,2.1rem)]">{s.title}</h3>
-                <p className="mt-3 text-stone">{s.body}</p>
-              </Reveal>
+              <li key={s.title} className="flex min-h-[15rem] flex-col justify-between rounded-[22px] bg-white p-7 shadow-[0_26px_54px_-36px_rgba(18,21,29,0.3)] ring-1 ring-ink/5 sm:p-8">
+                <p className="label-mono text-signal-strong">{String(i + 1).padStart(2, "0")}</p>
+                <div>
+                  <h3 className="font-title text-[clamp(1.6rem,2.2vw,2.1rem)]">{s.title}</h3>
+                  <p className="mt-3 text-[1.02rem] leading-snug text-stone">{s.body}</p>
+                </div>
+              </li>
             ))}
-          </div>
-          <div className="mt-14">
-            <ButtonLink href="/contact/">Discuss your cargo</ButtonLink>
-          </div>
+          </Reveal>
         </div>
       </section>
+
+      <CtaBand label="Discuss your cargo" lines={["Your industry, our expertise."]} />
     </>
   );
 }

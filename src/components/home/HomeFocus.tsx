@@ -6,7 +6,7 @@ import { ScrollZoom } from "@/components/motion/ScrollZoom";
 import { getService } from "@/content/services";
 
 /**
- * DESIGN LAB — "In focus: Custom clearance", built like the reference's product section (nomia-app.framer.website):
+ * "In focus: Custom clearance", built like the reference's product section (nomia-app.framer.website):
  * one big rounded photograph, a small icon label and a two-line headline bottom-left, and a row of frosted-glass
  * cards over the lower part of the picture. Copy is the original website's: the "resilient legacy of customs
  * clearance" line from the About text, and the Custom Clearance page's five sub-services, grouped into three cards.
@@ -73,7 +73,7 @@ const CARDS: Array<{ icon: (p: { className?: string }) => React.JSX.Element; tit
   },
 ];
 
-export function LabFocus() {
+export function HomeFocus() {
   return (
     <section aria-labelledby="lab-focus-title" className="py-12 sm:py-16">
       <div className="shell">

@@ -46,6 +46,8 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // the old design-lab preview now lives on the homepage
+      { source: "/home-lab/", destination: "/", permanent: false },
       { source: "/index.php", destination: "/", permanent: true },
       { source: "/index.php/:path+", destination: "/:path+/", permanent: true },
       ...legacy.map(([source, destination]) => ({ source, destination, permanent: true })),

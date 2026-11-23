@@ -16,7 +16,7 @@ export function Accordion({
   items: Item[];
   defaultOpen?: number | null;
   start?: number;
-  /** Lay the questions out as steps: each one is a card shifted a little further right than the one above. */
+  /** Lay the questions out as a stack of equal-width white cards. */
   staircase?: boolean;
   /** The 01, 02… index at the left of each question. */
   showNumbers?: boolean;
@@ -31,15 +31,10 @@ export function Accordion({
         return (
           <div
             key={f.q}
-            // Staircase: on wide screens every step is the same width and is moved right by an equal amount, so the
-            // steps run diagonally across the whole container (last step flush with the right edge). On small
-            // screens the steps are just nudged a little so the stairs still read.
-            style={staircase ? ({ "--i": i, "--n": Math.max(1, items.length - 1) } as React.CSSProperties) : undefined}
             className={
               staircase
                 ? cn(
                     "rounded-[18px] bg-white px-4 shadow-[0_22px_44px_-34px_rgba(18,21,29,0.3)] ring-1 transition-shadow duration-500 ease-[var(--ease-expo)] sm:px-7",
-                    "max-lg:ml-[calc(var(--i)*0.85rem)] sm:max-lg:ml-[calc(var(--i)*2.25rem)] lg:w-[52rem] lg:max-w-full lg:ml-[calc(var(--i)*(100%_-_52rem)/var(--n))]",
                     isOpen ? "ring-signal/40" : "ring-ink/[0.06] hover:ring-ink/15",
                   )
                 : "border-b border-line"
@@ -62,7 +57,7 @@ export function Accordion({
                 <span
                   className={cn(
                     "font-editorial transition-colors duration-500",
-                    // staircase questions stay on one line on wide screens
+                    // stacked-card questions stay on one line on wide screens
                     staircase ? "text-[clamp(1.15rem,1.7vw,1.4rem)] lg:whitespace-nowrap" : "text-[clamp(1.4rem,2.4vw,2.2rem)]",
                     isOpen ? "text-ink" : "text-ink/75 group-hover:text-ink",
                   )}

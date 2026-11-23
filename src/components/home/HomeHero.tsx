@@ -55,9 +55,9 @@ const BOX: Record<Box, { src: string; filter?: string }> = {
  * headline with an italic phrase, bracketed CTA, portrait circle + 20+ stat, rotating badge +
  * two-tone paragraph, a giant word sliding in behind a wall of stacked containers, and a tilted container
  * hanging from a crane that straightens and is lowered on scroll until it lands in the gap on the stack.
- * Lab-only: imported by src/app/home-lab/page.tsx, not by the live homepage.
+ * Used by the homepage (src/app/page.tsx).
  */
-export function LabHero() {
+export function HomeHero() {
   const ref = useRef<HTMLElement>(null);
 
   // Size + place the hanging container from the real layout, and work out where it lands.
@@ -176,7 +176,7 @@ export function LabHero() {
         gsap.to(q("[data-lab='top']"), {
           yPercent: 10,
           ease: "none",
-          // Ends when the hero is pinned as the About section's backdrop (see LabAbout).
+          // Ends when the hero is pinned as the About section's backdrop (see HomeAbout).
           scrollTrigger: { trigger: el, start: "top top", end: "bottom bottom", scrub: true },
         });
         return () => gsap.ticker.remove(idle);
@@ -339,12 +339,12 @@ export function LabHero() {
           <div data-lab="col-left" className="flex items-center gap-5 sm:gap-7">
             <div data-lab="portrait" className="relative size-28 shrink-0 overflow-hidden rounded-full bg-paper-3 sm:size-40 lg:size-48">
               <Image
-                src="/images/home/lab-portrait.webp"
-                alt="Logistics operations manager in a hard hat holding a tablet (illustrative)"
+                src="/images/home/hero-man.webp"
+                alt="Smiling logistics operations manager in a hard hat and hi-vis vest holding a tablet at a container terminal (illustrative)"
                 fill
                 priority
                 sizes="(min-width: 1024px) 12rem, 10rem"
-                className="object-cover object-top"
+                className="object-cover object-[50%_30%]"
               />
             </div>
             <div data-lab="side">

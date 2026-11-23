@@ -4,11 +4,11 @@ import { useRef } from "react";
 import { gsap, useGSAP, MOTION_OK } from "@/components/motion/gsap";
 
 /**
- * DESIGN LAB — the seam right after the hero. Whatever follows the hero (here: the Memberships strip) sits in
+ * the seam right after the hero. Whatever follows the hero (here: the Memberships strip) sits in
  * this wrapper. As it scrolls in, the finished hero dissolves into the page colour (scroll-scrubbed fade) and a
  * soft gradient rises over the hero's lower edge, so there is no hard cut between the hero and the next section.
  */
-export function LabHeroFade({ children }: { children: React.ReactNode }) {
+export function HomeHeroFade({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
 
   useGSAP(

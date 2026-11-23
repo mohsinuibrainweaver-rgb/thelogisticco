@@ -9,7 +9,7 @@ import { cn } from "@/lib/cn";
 type Status = { kind: "idle" } | { kind: "sending" } | { kind: "sent" } | { kind: "fallback"; mailto: string; reason: string };
 
 const field =
-  "peer w-full rounded-none border-0 border-b border-ink/25 bg-transparent px-0 pb-3 pt-2 text-lg text-ink outline-none transition-colors placeholder:text-stone/60 focus:border-ink focus:ring-0 aria-[invalid=true]:border-signal-deep";
+  "peer w-full rounded-[14px] border-0 bg-paper px-4 py-3.5 text-base text-ink outline-none ring-1 ring-ink/10 transition-[box-shadow,background-color] placeholder:text-stone/60 focus:bg-white focus:ring-2 focus:ring-ink aria-[invalid=true]:ring-signal-strong";
 
 export function QuoteForm() {
   const uid = useId();
@@ -54,11 +54,11 @@ export function QuoteForm() {
 
   if (status.kind === "sent") {
     return (
-      <div role="status" className="border-t border-ink pt-10">
+      <div role="status" className="py-6">
         <span className="grid size-14 place-items-center rounded-full bg-signal text-white">
           <Check aria-hidden className="size-6" />
         </span>
-        <h3 className="font-display mt-8 text-6xl">Request received.</h3>
+        <h3 className="font-title mt-8 text-[clamp(2.6rem,5vw,4rem)]">Request received.</h3>
         <p className="mt-4 max-w-md text-lg text-stone">Thank you. Our team will review your shipment details and get back to you by email.</p>
         <button type="button" onClick={() => setStatus({ kind: "idle" })} className="link-line mt-8 font-medium">
           Send another request
@@ -80,14 +80,14 @@ export function QuoteForm() {
     "aria-describedby": errors[k] ? `${uid}-${k}-err` : undefined,
   });
   const label = (k: keyof QuoteInput, text: string, req?: boolean) => (
-    <label htmlFor={`${uid}-${k}`} className="label-mono block text-stone">
+    <label htmlFor={`${uid}-${k}`} className="label-mono mb-2.5 block text-stone">
       {text}
       {req && <span className="text-signal-deep"> *</span>}
     </label>
   );
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} noValidate className="grid gap-x-8 gap-y-9 sm:grid-cols-2" aria-describedby={`${uid}-note`}>
+    <form ref={formRef} onSubmit={onSubmit} noValidate className="grid gap-x-5 gap-y-6 sm:grid-cols-2" aria-describedby={`${uid}-note`}>
       <p id={`${uid}-note`} className="label-mono text-stone sm:col-span-2">
         Fields marked * are required.
       </p>
@@ -163,7 +163,7 @@ export function QuoteForm() {
 
       <div aria-live="polite" className="sm:col-span-2">
         {status.kind === "fallback" && (
-          <div className="border border-signal/40 bg-signal/5 p-5">
+          <div className="rounded-[18px] border border-signal/40 bg-signal/5 p-5">
             <p className="font-medium">{status.reason}</p>
             <p className="mt-1 text-stone">Your details are ready to send. Choose a channel below:</p>
             <div className="mt-4 flex flex-wrap gap-3">

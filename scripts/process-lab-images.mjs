@@ -26,3 +26,9 @@ const mission = await sharp("assets/source/mission-a.png")
   .webp({ quality: 82 })
   .toFile("public/images/about/mission-team.webp");
 console.log("mission", `${mission.width}x${mission.height}`, `${Math.round(mission.size / 1024)} KB`);
+
+// Hero → portrait beside the "20+ years of experience" stat. Higgsfield `gpt_image_2_6` (high, 2k, 1:1),
+// job ca42c3f3-e09f-4ab0-b272-112d47fbbe63 (friendly male logistics manager in hard hat and hi-vis vest at a container
+// terminal). Source: assets/source/hero-man.png → 640×640 WebP. Illustrative, not a TLC employee.
+const man = await sharp("assets/source/hero-man.png").resize(640, 640, { fit: "cover" }).webp({ quality: 82 }).toFile("public/images/home/hero-man.webp");
+console.log("hero-man", `${man.width}x${man.height}`, `${Math.round(man.size / 1024)} KB`);

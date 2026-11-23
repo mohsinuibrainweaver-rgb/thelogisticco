@@ -21,29 +21,23 @@ export function StatsBand({ tone = "paper" }: { tone?: "paper" | "ink" }) {
 }
 
 /**
- * Global association memberships — the original website's logos (full colour, transparent) on
- * white cards in a slow marquee that pauses on hover. Header follows the editorial section style.
+ * Global association memberships — the original website's logos (transparent, no card behind them) in a slow
+ * marquee. Logos are small and grey; the one under the pointer (or keyboard focus) turns to its full colour.
+ * The marquee pauses while the pointer is over it, so a logo can be pointed at.
  */
 export function MembershipMarquee({ className }: { className?: string }) {
   const count = String(memberships.length).padStart(2, "0");
-  // Logo-only cards, like the original website. Generous vertical padding inside the marquee so the soft
-  // shadow and the hover lift are never clipped by the marquee's overflow edge.
   const cards = (hidden: boolean) => (
-    <ul className="marquee-track gap-4 py-10 pr-4 sm:gap-5 sm:pr-5" aria-hidden={hidden || undefined}>
+    <ul className="marquee-track items-center gap-14 py-4 pr-14 sm:gap-20 sm:pr-20" aria-hidden={hidden || undefined}>
       {memberships.map((m) => (
-        <li
-          key={m.name}
-          className="group relative grid h-40 w-[15.5rem] shrink-0 place-items-center overflow-hidden rounded-2xl bg-white px-8 shadow-[0_12px_32px_-18px_rgb(18_21_29/0.22)] ring-1 ring-ink/[0.05] transition-shadow duration-500 ease-[var(--ease-expo)] hover:shadow-[0_18px_38px_-18px_rgb(18_21_29/0.3)] sm:h-44 sm:w-[19rem]"
-        >
-          {/* signal hairline that draws in on hover */}
-          <span aria-hidden className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-signal transition-transform duration-700 ease-[var(--ease-expo)] group-hover:scale-x-100" />
+        <li key={m.name} className="shrink-0">
           <Image
             src={m.logo}
             alt={hidden ? "" : `${m.name} logo`}
             width={m.w}
             height={m.h}
-            sizes="(min-width: 640px) 230px, 190px"
-            className="max-h-[6.25rem] w-auto max-w-full object-contain transition-transform duration-700 ease-[var(--ease-expo)] group-hover:scale-[1.1] sm:max-h-28"
+            sizes="160px"
+            className="h-9 w-auto max-w-[10rem] object-contain opacity-60 grayscale transition-[filter,opacity] duration-500 ease-[var(--ease-expo)] hover:opacity-100 hover:grayscale-0 sm:h-11 sm:max-w-[12rem]"
           />
         </li>
       ))}
@@ -68,7 +62,7 @@ export function MembershipMarquee({ className }: { className?: string }) {
           <p className="label-mono max-w-[13rem] pb-1 text-stone">International freight &amp; logistics networks and associations</p>
         </div>
       </div>
-      <div className="marquee -my-3" style={{ ["--marquee-duration" as string]: "42s" }}>
+      <div className="marquee" style={{ ["--marquee-duration" as string]: "42s" }}>
         {cards(false)}
         {cards(true)}
       </div>

@@ -9,7 +9,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { services } from "@/content/services";
 
 /**
- * DESIGN LAB — "What we do" in the Shelta "stacked service cards" style (shelta.framer.website):
+ * "What we do" in the Shelta "stacked service cards" style (shelta.framer.website):
  * a pinned heading on the left, and on the right a column of cards that each stick below the header
  * and get covered by the next one as you scroll. Copy and images come from the original website
  * (homepage "What We Do" section + the original service-page banners).
@@ -45,7 +45,7 @@ const MODE_ICON: Record<string, LucideIcon> = {
   "custom-clearance": Stamp,
 };
 
-export function LabServices() {
+export function HomeServices() {
   const ref = useRef<HTMLElement>(null);
 
   useGSAP(

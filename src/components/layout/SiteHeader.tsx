@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { WhatsAppGlyph } from "@/components/ui/WhatsAppGlyph";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, ChevronDown, Mail, Phone } from "lucide-react";
@@ -213,15 +212,6 @@ export function SiteHeader() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <a
-              href={contact.whatsapp.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden h-11 items-center gap-2 rounded-full bg-whatsapp px-4 text-sm font-medium text-white shadow-[0_10px_22px_-12px_rgba(37,211,102,0.9)] transition-[background-color,transform,box-shadow] duration-300 hover:-translate-y-px hover:bg-[#1ebe5a] xl:flex"
-            >
-              <WhatsAppGlyph className="size-[1.2rem] text-white" />
-              WhatsApp
-            </a>
             <Link href="/contact/" className="btn btn-dark h-11 !pl-4 text-sm">
               <span className="hidden sm:inline">Get a quote</span>
               <span className="sm:hidden">Quote</span>

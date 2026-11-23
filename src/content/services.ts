@@ -14,6 +14,8 @@ export type Service = {
   intro: string;
   closing: string;
   image: { src: string; alt: string };
+  /** Portrait photograph used on the site's cards and page heroes (Higgsfield, scripts/process-service-photos.mjs). */
+  photo: { src: string; alt: string };
   detailImage: { src: string; alt: string };
   subServices: SubService[];
   seoTitle: string;
@@ -35,6 +37,7 @@ export const services: Service[] = [
     closing:
       "Choose our air freight services for reliable, efficient transportation tailored to your specific needs. Contact us to learn more or to request a quote.",
     image: { src: "/images/services/air-freight.webp", alt: "Cargo aircraft with its nose door raised being loaded on an airport apron at night" },
+    photo: { src: "/images/services/hf-air.webp", alt: "Cargo aircraft with its nose door raised being loaded with palletised cargo at blue hour" },
     detailImage: { src: "/images/services/air-freight-detail.webp", alt: "Netted air cargo pallets on a roller deck in a cargo terminal at dusk" },
     subServices: [
       { title: "Airport to Airport", body: "For customers who prefer to handle their own customs clearance and delivery — efficient transportation of your cargo between major airports worldwide, fast and reliable." },
@@ -64,6 +67,7 @@ export const services: Service[] = [
     closing:
       "Choose our sea freight services for reliable, efficient transportation tailored to your specific needs. Contact us to learn more or to request a quote.",
     image: { src: "/images/services/sea-freight.webp", alt: "Container ship at a quay being worked by gantry cranes in late-afternoon light" },
+    photo: { src: "/images/services/hf-sea.webp", alt: "Container ship at a quay being worked by gantry cranes in golden light" },
     detailImage: { src: "/images/services/sea-freight-detail.webp", alt: "Refrigerated reefer containers plugged in at a port terminal" },
     subServices: [
       { title: "Port to Port", body: "Cost-effective, efficient transportation between major ports worldwide — ideal if you prefer to manage your own customs clearance and onward delivery." },
@@ -93,6 +97,7 @@ export const services: Service[] = [
     closing:
       "Choose our road transport services for dependable, efficient transportation tailored to your needs. Contact us to learn more or to request a quote.",
     image: { src: "/images/services/road-transport.webp", alt: "Truck hauling a shipping container on a highway at sunrise" },
+    photo: { src: "/images/services/hf-road.webp", alt: "Freight truck pulling a container along an empty highway at sunrise" },
     detailImage: { src: "/images/services/road-transport-detail.webp", alt: "Line of freight trucks with container chassis at a logistics depot at dawn" },
     subServices: [
       { title: "Full Truck Loads", body: "FTL for large shipments that need an entire truck — exclusive use of the vehicle for faster, more direct delivery to your destination." },
@@ -118,6 +123,7 @@ export const services: Service[] = [
     closing:
       "Choose our project and heavy lift cargo services for reliable, efficient solutions tailored to your requirements. Contact us to learn more or to request a quote.",
     image: { src: "/images/services/project-cargo.webp", alt: "Industrial transformer moving on a multi-axle modular trailer through a port at dusk" },
+    photo: { src: "/images/services/hf-project.webp", alt: "A turbine being lifted by a heavy-lift crane onto a heavy-haul trailer at a quay at dusk" },
     detailImage: { src: "/images/services/project-cargo-detail.webp", alt: "Chains and lashings securing crated machinery on a break bulk vessel deck" },
     subServices: [
       { title: "On-site Survey", body: "Detailed surveys of your project's requirements and challenges — routes, access points and potential obstacles — to build a comprehensive plan for safe transport." },
@@ -144,6 +150,7 @@ export const services: Service[] = [
     closing:
       "Choose our professional customs clearance services for efficient, compliant and stress-free processing. Contact us to learn more or to request a quote.",
     image: { src: "/images/services/customs-clearance.webp", alt: "Inspector reviewing an open container inside a bonded customs warehouse" },
+    photo: { src: "/images/services/hf-customs.webp", alt: "Customs officer checking documents beside an open shipping container in a bonded warehouse" },
     detailImage: { src: "/images/services/customs-clearance-detail.webp", alt: "Aisle of pallet racking in a secure bonded warehouse" },
     subServices: [
       { title: "Import Customs Declaration", body: "Preparation and submission of import declarations so goods are processed efficiently and in compliance — we handle the paperwork and liaise with customs on your behalf." },

@@ -11,7 +11,7 @@ import { industries, industriesIntro } from "@/content/industries";
 import { cn } from "@/lib/cn";
 
 /**
- * DESIGN LAB — "Specialized Industries" with the original website's 15 tile images
+ * "Specialized Industries" with the original website's 15 tile images
  * (scripts/fetch-industry-images.mjs). On a mouse the picture is hidden until you hover a row: it wipes in
  * beside the cursor (clip-path reveal + zoom settle), follows the pointer with a little tilt and swaps with a
  * wipe when you move to another row. Touch devices have no hover, so every row shows a small thumbnail instead.
@@ -69,7 +69,7 @@ function IndustryIcon({ name }: { name: string }) {
 const PREVIEW_W = 288;
 const PREVIEW_H = Math.round((PREVIEW_W * 342) / 500); // images are 500×342
 
-export function LabIndustries() {
+export function HomeIndustries() {
   const zone = useRef<HTMLDivElement>(null);
   const preview = useRef<HTMLDivElement>(null);
   const move = useRef<{ x: (v: number) => void; y: (v: number) => void; r: (v: number) => void } | null>(null);
