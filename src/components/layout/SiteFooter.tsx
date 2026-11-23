@@ -36,7 +36,7 @@ export function SiteFooter() {
       <div className="shell pb-8">
         <div className="grid gap-12 border-t border-white/15 pt-12 md:grid-cols-12">
           <div className="md:col-span-5">
-            <Logo tone="white" className="h-12" />
+            <Logo tone="white" className="h-24" />
             <p className="mt-5 max-w-sm text-paper/75">{company.summary}</p>
             <p className="label-mono mt-6 flex flex-wrap gap-x-5 gap-y-2 text-paper/85">
               <a href={`mailto:${contact.email}`} className="link-line">
@@ -94,7 +94,12 @@ export function SiteFooter() {
         </div>
         <div className="label-mono mt-12 flex flex-col gap-2 text-paper/60 sm:flex-row sm:justify-between">
           <p>© {company.name} — Lahore · Dubai</p>
-          <p>Freight forwarding · Customs clearance · Logistics</p>
+          <p>
+            Design and developed by{" "}
+            <a href="https://endpointclients.com/" target="_blank" rel="noopener noreferrer" className="link-line text-paper/90 hover:text-paper">
+              End Point Clients
+            </a>
+          </p>
         </div>
       </div>
     </footer>

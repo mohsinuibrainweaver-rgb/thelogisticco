@@ -32,12 +32,6 @@ export default function ContactPage() {
         description="Get in touch and we’ll help your business move. Request a quote, book an appointment or ask our team anything."
       />
 
-      <section aria-label="Our offices" className="py-6 sm:py-8">
-        <div className="shell">
-          <OfficeCards />
-        </div>
-      </section>
-
       <section aria-labelledby="quote-heading" id="quote" className="py-12 sm:py-16">
         <div className="shell grid gap-10 lg:grid-cols-12 lg:gap-14">
           <div className="lg:col-span-4">
@@ -81,6 +75,12 @@ export default function ContactPage() {
           <div className="relative rounded-[22px] bg-white p-6 shadow-[0_30px_60px_-38px_rgba(18,21,29,0.35)] ring-1 ring-ink/5 sm:p-9 lg:col-span-8">
             <QuoteForm />
           </div>
+        </div>
+      </section>
+
+      <section aria-label="Our offices" className="pb-12 sm:pb-16">
+        <div className="shell">
+          <OfficeCards />
         </div>
       </section>
     </>

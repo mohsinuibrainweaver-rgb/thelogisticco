@@ -27,13 +27,15 @@ export function StatsBand({ tone = "paper" }: { tone?: "paper" | "ink" }) {
  */
 export function MembershipMarquee({ className }: { className?: string }) {
   const count = String(memberships.length).padStart(2, "0");
+  // The logos are repeated three times inside each track so a track is always wider than the screen — with only seven
+  // logos a single copy is narrower than a wide display and would leave an empty gap before the loop restarts.
   const cards = (hidden: boolean) => (
     <ul className="marquee-track items-center gap-14 py-4 pr-14 sm:gap-20 sm:pr-20" aria-hidden={hidden || undefined}>
-      {memberships.map((m) => (
-        <li key={m.name} className="shrink-0">
+      {[...memberships, ...memberships, ...memberships].map((m, i) => (
+        <li key={`${m.name}-${i}`} className="shrink-0">
           <Image
             src={m.logo}
-            alt={hidden ? "" : `${m.name} logo`}
+            alt={hidden || i >= memberships.length ? "" : `${m.name} logo`}
             width={m.w}
             height={m.h}
             sizes="160px"
